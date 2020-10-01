@@ -1,7 +1,12 @@
 require 'set'
 
-def create_vertex_list(roads)
-    
+def create_vertex_set(roads)
+    '''
+    Function to process a list of road hashes and return the set of vertex coordinates from that list.
+    Vertices are any coordinates that either: a) begin or end a road or b) are found within at least two roads (i.e. intersections)
+    :return: a set of vertices
+    '''
+
     # frequency map of times a given node appears in all roads
     node_count = {}
 
@@ -32,6 +37,6 @@ def create_vertex_list(roads)
         end
     end
 
-    Set.new( node_count.filter{ |node, num| num > 1 }.keys )
+    return Set.new( node_count.filter{ |node, num| num > 1 }.keys )
 
 end

@@ -1,7 +1,18 @@
 require 'haversine'
 
 def create_adjacency_hash(roads, vertices)
+    """
+    Creates an adjacency hash from a list of roads and set of vertices. 
+    
+    The graph is represented as a hash of hashes, where the keys are coordinate pairs [lat, lon] (as a list), 
+    and the values are hashes that contain neighbor coordinate pairs as keys and edge lengths as values.
+    If an edge exists from a coordinate pair, x, to coordinate pair, y, of length z, then adj[x][y] will equal z.
+    
+    Here's an example: { [lat1, lon1] => { [lat2, lon2] => distance1, [lat3, lon3] => distance2 } }
+    In this example, there is an edge from [lat1, lon1] to [lat2, lon2] of length distance1 and an edge from [lat1, lon1] to [lat3, lon3] of length distance2.
 
+    :return: adjacency hash representation of a graph
+    """
     adj = {}
 
     roads.each do |road|
@@ -58,6 +69,6 @@ def create_adjacency_hash(roads, vertices)
 
     end
 
-    adj
+    return adj
 
 end

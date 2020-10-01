@@ -9,4 +9,6 @@ Gem::Specification.new do |s|
     s.files         = ["lib/overpass_graph.rb","lib/overpass_graph/get_roads.rb","lib/overpass_graph/create_vertex_list.rb","lib/overpass_graph/create_adjacency_hash.rb"]
     s.homepage      = 'https://github.com/samlawhon/overpass-graph'
     s.license       = 'MIT'
+    s.add_dependency 'overpass-api-ruby', 0.3.1
+    s.add_dependency 'haversine', 0.3.2
 end
