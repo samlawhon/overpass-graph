@@ -24,9 +24,10 @@ def create_adjacency_hash(roads, vertices)
             adj[start_vertex] = {}
         end
 
-        # as we iterate through the nodes in the road, we need to keep track of the distance
-        # we've traveled so far along the road, the previous node (to incremenent distance),
-        # and the previous vertex to join it with any new vertex we discover
+        # Need to keep track of the distance travelled along road, the previous node (to increment distance)
+        # and the previous vertex. Upon discovering a new vertex in the iteration, an edge is created from
+        # the previous vertex to the discovered vertex (and if the road is two-way, from the discovered 
+        # vertex back to the previous vertex)
         distance = 0
         prev_node = { coords: start_vertex, distance: distance }
         prev_vertex = { coords: start_vertex, distance: distance }
@@ -38,10 +39,9 @@ def create_adjacency_hash(roads, vertices)
             # updating distance with previous node and current node
             distance += Haversine.distance(prev_node[:coords][0], prev_node[:coords][1], current[0], current[1]).to_miles
             
-            # if the current node is in the set of vertices, calculate the distance between it and the previous vertex,
-            # then add the previous vertex as a neighbor of the current in adj, and the current as a neighbor of
-            # the previous vertex in adj, both with the same weight equal to distance between. Finally, just update
-            # the previous vertex
+            # if the current node is in the set of vertices, calculate the distance between it and the previous vertex.
+            # Then add an edge of that length from the previous vertex to the current node. If the road is two-way, also add an edge
+            # from the current node back to the previous vertex.
             if vertices === current
 
                 distance_between = distance - prev_vertex[:distance]
