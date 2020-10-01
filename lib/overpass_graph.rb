@@ -1,6 +1,6 @@
-require 'overpass_graph/get_roads'
-require 'overpass_graph/create_vertex_list'
-require 'overpass_graph/create_adjacency_hash'
+require './overpass_graph/get_roads'
+require './overpass_graph/create_vertex_list'
+require './overpass_graph/create_adjacency_hash'
 
 def overpass_graph(north, east, south, west)
 
