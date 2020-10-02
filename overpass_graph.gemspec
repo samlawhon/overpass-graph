@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
     s.description   = "Lightweight gem to create weighted, directed graphs of streets in a given bounding box. The library builds graphs using Open Street Map data queried through the Overpass API."
     s.authors       = ["Sam Lawhon"]
     s.email         = 'samlawhon1@gmail.com'
-    s.files         = ["lib/overpass_graph.rb","lib/overpass_graph/get_roads.rb","lib/overpass_graph/create_vertex_list.rb","lib/overpass_graph/create_adjacency_hash.rb"]
+    s.files         = ["lib/overpass_graph.rb","lib/overpass_graph/get_roads.rb","lib/overpass_graph/create_vertex_set.rb","lib/overpass_graph/create_adjacency_hash.rb"]
     s.homepage      = 'https://github.com/samlawhon/overpass-graph'
     s.license       = 'MIT'
-    s.add_dependency 'overpass-api-ruby', 0.3.1
-    s.add_dependency 'haversine', 0.3.2
+    s.add_dependency 'overpass-api-ruby', '0.3.1'
+    s.add_dependency 'haversine', '0.3.2'
 end
