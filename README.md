@@ -19,6 +19,7 @@ In this example:
 
 ### Graph Representation
 `overpass_graph` will return a graph represented by an adjacency map. The keys are starting vertices and the values are maps of ending vertices to edge lengths. That is, if an edge exists in graph, `g`, from vertex `x` to vertex `y` of length `d`, then `g[x][y]` will equal `d`.
+
 Note that vertices in the graph are any nodes in the set of queried nodes that either: A) are endpoints of a road or B) are present in at least two roads (i.e. intersections).
 
 ### Optional Arguments
@@ -38,9 +39,10 @@ Note that vertices in the graph are any nodes in the set of queried nodes that e
 The algorithm to build the graph works as follows:
 * First, it builds the set of vertices in the graph. This is done by processing all coordinates in the set of queried roads. If a coordinate begins or ends a road, or if it is present in more than one road, it will be added to the vertex set.
 * Second, it builds the adjacency map, by processing all coordinates again and constructing edges from one vertex to the next vertex based on the sum of the distances between the intervening nodes.
+
 NOTE: the time and space complexity for building the graph are both *O(n)* where *n* is the number of nodes returned by the API call. In practice, for reasonably sized bounding boxes, the API call will take much longer than building the graph.
 
 ## Example
 
 ## License
-Released under the MIT license. See the [LICENSE] (https://github.com/samlawhon/overpass-graph/blob/master/LICENSE.txt) file for further details.
+Released under the MIT license. See the [LICENSE](https://github.com/samlawhon/overpass-graph/blob/master/LICENSE.txt) file for further details.
