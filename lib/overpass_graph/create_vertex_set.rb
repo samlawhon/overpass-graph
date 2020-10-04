@@ -16,8 +16,8 @@ def create_vertex_set(roads)
         start_vertex = [road_nodes[0][:lat], road_nodes[0][:lon]]
         end_vertex = [road_nodes[-1][:lat], road_nodes[-1][:lon]]
 
-        # this is kind of a hacky way to ensure that each start and end vertex will be included in the 
-        # set of returned vertices, because post iteration they'll both have at least 2 in node_count
+        # this ensures that each start and end vertex will be included in the set of returned
+        # vertices, because post iteration they'll both have at least 2 in node_count
         if !node_count.has_key?(start_vertex)
             node_count[start_vertex] = 1
         end
@@ -25,7 +25,7 @@ def create_vertex_set(roads)
             node_count[end_vertex] = 1
         end
         
-        # this will pick up any nodes that form intersections (ie are nodes in multiple roads),
+        # this will pick up any nodes that form intersections (i.e. are nodes in multiple roads),
         # but aren't the starting or ending nodes of any road
         road_nodes.each do |node|
             current = [node[:lat], node[:lon]]

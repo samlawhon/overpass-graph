@@ -2,25 +2,13 @@ require_relative '../lib/overpass_graph'
 
 DISTANCE_ERROR_TOLERANCE = 0.03     # % different from Google maps
 
-shore_acres_north = 40.95352042058797
-shore_acres_east = -73.71407747268677
-shore_acres_south = 40.94329381595473
-shore_acres_west = -73.73105049133301
-shore_acres_graph = overpass_graph(shore_acres_north, shore_acres_east, shore_acres_south, shore_acres_west)
-
-midtown_north = 40.764104432913086
-midtown_east = -73.97675156593323
-midtown_south = 40.75897668730365
-midtown_west = -73.98523807525635
-midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west)
-
-hanover_north = 43.7031803975023
-hanover_east = -72.28413820266724
-hanover_south = 43.69828604529516
-hanover_west = -72.29262471199036
-hanover_graph = overpass_graph(hanover_north, hanover_east, hanover_south, hanover_west)
-
 describe "graph for Shore Acres, Mamaroneck, NY" do
+
+    shore_acres_north = 40.95352042058797
+    shore_acres_east = -73.71407747268677
+    shore_acres_south = 40.94329381595473
+    shore_acres_west = -73.73105049133301
+    shore_acres_graph = overpass_graph(shore_acres_north, shore_acres_east, shore_acres_south, shore_acres_west)
 
     describe "one way street" do
         describe "the Parkway" do
@@ -92,6 +80,12 @@ end
 
 describe "graph for (part of) Midtown, Manhattan, NY" do
 
+    midtown_north = 40.764104432913086
+    midtown_east = -73.97675156593323
+    midtown_south = 40.75897668730365
+    midtown_west = -73.98523807525635
+    midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west)
+
     describe "one way street" do
         describe "West 50th Street" do
             beginning = [40.7614200, -73.9840231]   # intersection of Broadway sidewalk and West 50th Street
@@ -135,7 +129,88 @@ describe "graph for (part of) Midtown, Manhattan, NY" do
 
 end
 
+describe "undirected graph for (part of) Midtown, Manhattan, NY" do
+
+    midtown_north = 40.764104432913086
+    midtown_east = -73.97675156593323
+    midtown_south = 40.75897668730365
+    midtown_west = -73.98523807525635
+    midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west, directed: false)
+
+    describe "one way street" do
+        describe "West 50th Street" do
+            beginning = [40.7614200, -73.9840231]   # intersection of Broadway sidewalk and West 50th Street
+            ending = [40.7612779, -73.9836865]      # end of western half of West 50th Street
+
+            it "should have an edge from the intersection of Broadway and West 50th Street to the end of the western half of West 50th Street" do
+                expect(midtown_graph[beginning]).to include(ending)
+            end
+
+            it "should have an edge from the end of the western half of West 50th Street BACK to the intersection of Broadway and West 50th Street" do
+                expect(midtown_graph[ending]).to include(beginning)
+            end
+        end
+    end
+
+end
+
+describe "graph for (part of) Midtown, Manhattan, NY excluding 'secondary' highways" do
+
+    midtown_north = 40.764104432913086
+    midtown_east = -73.97675156593323
+    midtown_south = 40.75897668730365
+    midtown_west = -73.98523807525635
+    midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west, filter_by_allowing: false, filtered_values:['secondary'])
+
+    describe "'secondary' highway" do
+        describe "West 50th Street" do
+            beginning = [40.7614200, -73.9840231]   # intersection of Broadway sidewalk and West 50th Street
+            ending = [40.7612779, -73.9836865]      # end of western half of West 50th Street
+
+            it "should not have beginning as a vertex, because while Broadway will be present in the graph, the 'beginning' node will only be on Broadway, hence not a vertex" do
+                expect(midtown_graph).not_to include(beginning)
+            end
+
+            it "should not have ending as a vertex, because West 50th street as a 'secondary' highway should not be included in the graph" do
+                expect(midtown_graph).not_to include(ending)
+            end
+        end
+    end
+
+end
+
+describe "graph for (part of) Midtown, Manhattan, NY including only 'secondary' highways" do
+
+    midtown_north = 40.764104432913086
+    midtown_east = -73.97675156593323
+    midtown_south = 40.75897668730365
+    midtown_west = -73.98523807525635
+    midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west, filtered_values:['secondary'])
+
+    describe "'secondary' highway" do
+        describe "West 50th Street" do
+            beginning = [40.7614200, -73.9840231]   # intersection of Broadway sidewalk and West 50th Street
+            ending = [40.7612779, -73.9836865]      # end of western half of West 50th Street
+
+            it "should not have beginning as a vertex, because while West 50th Street will be present in the graph, the 'beginning' node will only be only on West 50th Street, hence not a vertex" do
+                expect(midtown_graph).not_to include(beginning)
+            end
+
+            it "should have ending as a vertex, because West 50th street is a 'secondary' highway and its end should be a vertex in the graph" do
+                expect(midtown_graph).to include(ending)
+            end
+        end
+    end
+
+end
+
 describe "graph for Hanover, NH" do
+
+    hanover_north = 43.7031803975023
+    hanover_east = -72.28413820266724
+    hanover_south = 43.69828604529516
+    hanover_west = -72.29262471199036
+    hanover_graph = overpass_graph(hanover_north, hanover_east, hanover_south, hanover_west)
     
     describe "one way street" do
         describe "allen street" do

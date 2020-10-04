@@ -1,6 +1,6 @@
 require 'haversine'
 
-def create_adjacency_hash(roads, vertices)
+def create_adjacency_hash(roads, vertices, directed)
     """
     Creates an adjacency hash from a list of roads and set of vertices. 
     
@@ -46,7 +46,7 @@ def create_adjacency_hash(roads, vertices)
 
                 distance_between = distance - prev_vertex[:distance]
 
-                if road[:tags][:oneway] != 'yes'
+                if road[:tags][:oneway] != 'yes' || !directed
                     if adj.has_key?(current)
                         adj[current][prev_vertex[:coords]] = distance_between
                     else
