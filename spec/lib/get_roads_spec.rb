@@ -82,3 +82,27 @@ describe "Manhattan, NY no primary roads analysis" do
     end
 
 end
+
+describe "a roads query with invalid latitude values (north > 90)" do
+    
+    it "should throw an error" do
+        expect{ invalid_latitude_roads() }.to raise_error(RuntimeError, /Latitudes/)
+    end
+
+end
+
+describe "a roads query with invalid longitude values (west < -180)" do
+
+    it "should throw an error" do
+        expect{ invalid_longitude_roads() }.to raise_error(RuntimeError, /Longitudes/)
+    end
+
+end
+
+describe "a roads query with invalid latitude values (south > north)" do
+
+    it "should throw an error" do
+        expect{ south_greater_than_north_roads() }.to raise_error(RuntimeError, /Northern latitude is less than southern latitude/)
+    end
+
+end

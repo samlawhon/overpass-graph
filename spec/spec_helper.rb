@@ -44,3 +44,30 @@ def hanover_roads
     hanover_west = -72.29262471199036
     get_roads(hanover_north, hanover_east, hanover_south, hanover_west, [], [])
 end
+
+# analysis of invalid latitude query
+def invalid_latitude_roads
+    north = 91
+    east = -100
+    south = 90
+    west = -101
+    get_roads(north, east, south, west, [], [])
+end
+
+# analysis of invalid longitude query
+def invalid_longitude_roads
+    north = 80
+    east = -178
+    south = 79
+    west = -181
+    get_roads(north, east, south, west, [], [])
+end
+
+# analysis of invalid latitude (south greater than north) query
+def south_greater_than_north_roads
+    north = 78
+    east = -100
+    south = 79
+    west = -101
+    get_roads(north, east, south, west, [], [])
+end
