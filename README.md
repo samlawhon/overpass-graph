@@ -1,8 +1,9 @@
 # overpass-graph
 
 ## Installation
-`gem install overpass_graph`
-
+```
+gem install overpass_graph
+```
 ## Usage
 ### Basic Usage
 To create a graph, use the function `overpass_graph` after requiring the library.
@@ -30,10 +31,18 @@ Note that vertices in the graph are any nodes in the set of queried nodes that e
 
 #### Filtering
 `overpass_graph` allows you to filter the types of roads contained in the graph. As the library creates graphs using Open Street Map (OSM) data, this filtering is done using the OSM data model. By default, the function queries for all *ways* with the key *highway* (OSM's key for identifying any type of road, street or path). You may restrict which *highway* values the function queries for (and hence builds a graph from). This is done in two different ways:
-* To specify which *highway* values you would like to build a graph from, pass an array of allowed OSM *highway* values as follows: `overpass_graph(..., filtered_values: ['primary', 'secondary'])`. That would return a graph built from all the primary and secondary *highway*s in the specific bounding box.
+* To specify which *highway* values you would like to build a graph from, pass an array of allowed OSM *highway* values to the filtered values. The following would return a graph built from all the primary and secondary *highway*s in the specified bounding box: 
+```
+overpass_graph(..., filtered_values: ['primary', 'secondary'])
+```
 * To query for all *highway* values except for a specified few which are not allowed, you must pass two keyword arguments to `overpass_graph`. 
-⋅⋅ * First, to specify that you wish to prevent certain *highway* values and allow all others, pass the keyword argument `filter_by_allowing: false` to the function. 
-⋅⋅ * Second, pass in the not-allowed values to the `overpass_graph` function using the filtered values keyword argument as follows: `overpass_graph(..., filter_by_allowing: false, filtered_values: ['secondary'])`. That would return a graph with all ways of type *highway* except for 'secondary' *highway*s.
+    * First, to specify that you wish to prevent certain *highway* values and allow all others, pass the keyword argument `filter_by_allowing: false` to the function. 
+    * Second, pass in the not-allowed values to the `overpass_graph` function using the filtered values keyword argument. The following would return a graph with all ways of type *highway* except for 'secondary' *highway*s: 
+    ```
+    overpass_graph(..., filter_by_allowing: false, filtered_values: ['secondary'])
+    ```
+
+Find out more about the OSM data model and possible keys [here](https://wiki.openstreetmap.org/wiki/Key:highway)
 
 ## Under the hood
 The algorithm to build the graph works as follows:
