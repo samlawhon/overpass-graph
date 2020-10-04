@@ -1,6 +1,6 @@
 require 'haversine'
 
-def create_adjacency_hash(roads, vertices, directed)
+def create_adjacency_hash(roads, vertices, directed, metric)
     """
     Creates an adjacency hash from a list of roads and set of vertices. 
     
@@ -37,7 +37,11 @@ def create_adjacency_hash(roads, vertices, directed)
             current = [road_nodes[i][:lat], road_nodes[i][:lon]]
             
             # updating distance with previous node and current node
-            distance += Haversine.distance(prev_node[:coords][0], prev_node[:coords][1], current[0], current[1]).to_miles
+            if !metric
+                distance += Haversine.distance(prev_node[:coords][0], prev_node[:coords][1], current[0], current[1]).to_miles
+            else
+                distance += Haversine.distance(prev_node[:coords][0], prev_node[:coords][1], current[0], current[1]).to_km
+            end
             
             # if the current node is in the set of vertices, calculate the distance between it and the previous vertex.
             # Then add an edge of that length from the previous vertex to the current node. If the road is two-way, also add an edge

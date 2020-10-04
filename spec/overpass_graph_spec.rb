@@ -78,6 +78,60 @@ describe "graph for Shore Acres, Mamaroneck, NY" do
 
 end
 
+describe "graph for Shore Acres, Mamaroneck, NY with metric distances" do
+
+    shore_acres_north = 40.95352042058797
+    shore_acres_east = -73.71407747268677
+    shore_acres_south = 40.94329381595473
+    shore_acres_west = -73.73105049133301
+    shore_acres_graph = overpass_graph(shore_acres_north, shore_acres_east, shore_acres_south, shore_acres_west, metric: true)
+
+    describe "one way street" do
+        describe "the Parkway" do
+            beginning = [40.9469554, -73.7241626]   # intersection of the Parkway and South Barry Avenue
+            ending = [40.9451575, -73.7254262]
+            distance = 0.225  # km, per Google maps (approximate)
+
+            it "should be about 0.225 km to the next intersection" do
+                distance_low_threshold = (1 - DISTANCE_ERROR_TOLERANCE) * distance
+                distance_high_threshold = (1 + DISTANCE_ERROR_TOLERANCE) * distance
+                expect(shore_acres_graph[beginning][ending]).to be_between(distance_low_threshold, distance_high_threshold)
+            end
+
+            it "should have an edge from the intersection of the Parkway and South Barry to the next intersection" do
+                expect(shore_acres_graph[beginning]).to include(ending)
+            end
+
+            it "should not have an edge from that next intersection BACK to the intersection of the Parkway and South Barry" do
+                expect(shore_acres_graph[ending]).not_to include(beginning)
+            end
+        end
+    end
+
+    describe "two way street" do
+        describe "Oakhurst Road" do
+            beginning_of_oakhurst = [40.9453010, -73.7272770]   # intersection with Shore Acres drive
+            end_of_oakhurst = [40.9477130, -73.7245710]     # intersection with South Barry Avenue
+            distance = 0.37    # km, per Google maps (approximate)
+
+            it "should be about 0.37 km between the intersections" do
+                distance_low_threshold = (1 - DISTANCE_ERROR_TOLERANCE) * distance
+                distance_high_threshold = (1 + DISTANCE_ERROR_TOLERANCE) * distance
+                expect(shore_acres_graph[beginning_of_oakhurst][end_of_oakhurst]).to be_between(distance_low_threshold, distance_high_threshold)
+            end
+
+            it "should have an edge from the intersection with Shore Acres Drive to the intersection with South Barry Avenue" do
+                expect(shore_acres_graph[beginning_of_oakhurst]).to include(end_of_oakhurst)
+            end
+
+            it "should have an edge the intersection with South Barry Avenue BACK to the intersection with Shore Acres Drive" do
+                expect(shore_acres_graph[end_of_oakhurst]).to include(beginning_of_oakhurst)
+            end
+        end
+    end
+
+end
+
 describe "graph for (part of) Midtown, Manhattan, NY" do
 
     midtown_north = 40.764104432913086

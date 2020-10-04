@@ -2,7 +2,7 @@ require_relative './overpass_graph/get_roads'
 require_relative './overpass_graph/create_vertex_set'
 require_relative './overpass_graph/create_adjacency_hash'
 
-def overpass_graph(north, east, south, west, directed: true, filter_by_allowing: true, filtered_values:[])
+def overpass_graph(north, east, south, west, directed: true, filter_by_allowing: true, filtered_values:[], metric: false)
 
     allowed_values = []
     disallowed_values = []
@@ -13,6 +13,6 @@ def overpass_graph(north, east, south, west, directed: true, filter_by_allowing:
 
     vertices = create_vertex_set(roads)
 
-    return create_adjacency_hash(roads, vertices, directed)
+    return create_adjacency_hash(roads, vertices, directed, metric)
 
 end
