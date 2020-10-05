@@ -2,7 +2,7 @@
 
 ## Installation
 ```
-gem install overpass_graph
+coming soon
 ```
 ## Usage
 ### Basic Usage
@@ -30,7 +30,7 @@ Note that vertices in the graph are any nodes in the set of queried nodes that e
 * To make a graph with metric distance values as opposed to imperial, pass `metric: true` to the function (by default, graphs use the imperial system)
 
 #### Filtering
-`overpass_graph` allows you to filter the types of roads contained in the graph. As the library creates graphs using Open Street Map (OSM) data, this filtering is done using the OSM data model. By default, the function queries for all *ways* with the key *highway* (OSM's key for identifying any type of road, street or path). You may restrict which *highway* values the function queries for (and hence builds a graph from). This is done in two different ways:
+`overpass_graph` allows you to filter the types of roads contained in the graph. As the library creates graphs using OpenStreetMap (OSM) data, this filtering is done using the OSM data model. By default, the function queries for all *ways* with the key *highway* (OSM's key for identifying any type of road, street or path). You may restrict which *highway* values the function queries for (and hence builds a graph from). This is done in two different ways:
 * To specify which *highway* values you would like to build a graph from, pass an array of allowed OSM *highway* values to the filtered values. The following would return a graph built from all the primary and secondary *highway*s in the specified bounding box: 
 ```
 overpass_graph(..., filtered_values: ['primary', 'secondary'])
