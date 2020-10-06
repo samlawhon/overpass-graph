@@ -3,106 +3,106 @@ require_relative '../../lib/overpass_graph/get_roads'
 
 describe "Shore Acres, Mamaroneck, NY analysis" do 
 
-    shore_acres_roads = shore_acres_roads()
+  shore_acres_roads = shore_acres_roads()
 
-    describe "roads data type" do
-        it "should be an array" do
-            expect(shore_acres_roads).to be_a(Array)
-        end
+  describe "roads data type" do
+    it "should be an array" do
+      expect(shore_acres_roads).to be_a(Array)
     end
+  end
 
-    describe "elements in roads array" do
-        it "should only include hashes of type 'way'" do
-            expect( shore_acres_roads.filter{|road| road[:type] == 'way'}.length ).to eq(shore_acres_roads.length)
-        end
+  describe "elements in roads array" do
+    it "should only include hashes of type 'way'" do
+      expect( shore_acres_roads.filter{|road| road[:type] == 'way'}.length ).to eq(shore_acres_roads.length)
     end
+  end
 
 end
 
 describe "Midtown, Manhattan, NY analysis" do 
 
-    midtown_roads = midtown_roads()
+  midtown_roads = midtown_roads()
 
-    describe "roads data type" do
-        it "should be an array" do
-            expect(midtown_roads).to be_a(Array)
-        end
+  describe "roads data type" do
+    it "should be an array" do
+      expect(midtown_roads).to be_a(Array)
     end
+  end
 
-    describe "elements in roads array" do
-        it "should only include hashes of type 'way'" do
-            expect( midtown_roads.filter{|road| road[:type] == 'way'}.length ).to eq(midtown_roads.length)
-        end
+  describe "elements in roads array" do
+    it "should only include hashes of type 'way'" do
+      expect( midtown_roads.filter{|road| road[:type] == 'way'}.length ).to eq(midtown_roads.length)
     end
+  end
 
 end
 
 describe "Hanover, NH analysis" do
 
-    hanover_roads = hanover_roads()
+  hanover_roads = hanover_roads()
 
-    describe "roads data type" do
-        it "should be an array" do
-            expect(hanover_roads).to be_a(Array)
-        end
+  describe "roads data type" do
+    it "should be an array" do
+      expect(hanover_roads).to be_a(Array)
     end
+  end
 
-    describe "elements in roads array" do
-        it "should only include hashes of type 'way'" do
-            expect( hanover_roads.filter{|road| road[:type] == 'way'}.length ).to eq(hanover_roads.length)
-        end
+  describe "elements in roads array" do
+    it "should only include hashes of type 'way'" do
+      expect( hanover_roads.filter{|road| road[:type] == 'way'}.length ).to eq(hanover_roads.length)
     end
+  end
 
 end
 
 describe "Manhattan, NY only primary roads analysis" do
 
-    midtown_primary_roads = midtown_primary_roads()
+  midtown_primary_roads = midtown_primary_roads()
 
-    describe "elements in roads array" do
-        it "should only include primary roads" do
-            midtown_primary_roads.each do |road|
-                expect(road[:tags][:highway]).to eq('primary')
-            end
-        end
+  describe "elements in roads array" do
+    it "should only include primary roads" do
+      midtown_primary_roads.each do |road|
+        expect(road[:tags][:highway]).to eq('primary')
+      end
     end
+  end
 
 end
 
 describe "Manhattan, NY no primary roads analysis" do
 
-    midtown_no_primary_roads = midtown_no_primary_roads()
+  midtown_no_primary_roads = midtown_no_primary_roads()
 
-    describe "elements in roads array" do
-        it "should not include any primary roads" do
-            midtown_no_primary_roads.each do |road|
-                expect(road[:tags][:highway]).not_to eq('primary')
-            end
-        end
+  describe "elements in roads array" do
+    it "should not include any primary roads" do
+      midtown_no_primary_roads.each do |road|
+        expect(road[:tags][:highway]).not_to eq('primary')
+      end
     end
+  end
 
 end
 
 describe "a roads query with invalid latitude values (north > 90)" do
-    
-    it "should throw an error" do
-        expect{ invalid_latitude_roads() }.to raise_error(RuntimeError, /Latitudes/)
-    end
+  
+  it "should throw an error" do
+    expect{ invalid_latitude_roads() }.to raise_error(RuntimeError, /Latitudes/)
+  end
 
 end
 
 describe "a roads query with invalid longitude values (west < -180)" do
 
-    it "should throw an error" do
-        expect{ invalid_longitude_roads() }.to raise_error(RuntimeError, /Longitudes/)
-    end
+  it "should throw an error" do
+    expect{ invalid_longitude_roads() }.to raise_error(RuntimeError, /Longitudes/)
+  end
 
 end
 
 describe "a roads query with invalid latitude values (south > north)" do
 
-    it "should throw an error" do
-        expect{ south_greater_than_north_roads() }.to raise_error(RuntimeError, /Northern latitude is less than southern latitude/)
-    end
+  it "should throw an error" do
+    expect{ south_greater_than_north_roads() }.to raise_error(RuntimeError, /Northern latitude is less than southern latitude/)
+  end
 
 end
