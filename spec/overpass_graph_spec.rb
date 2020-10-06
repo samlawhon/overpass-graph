@@ -8,7 +8,7 @@ describe "graph for Shore Acres, Mamaroneck, NY" do
   shore_acres_east = -73.71407747268677
   shore_acres_south = 40.94329381595473
   shore_acres_west = -73.73105049133301
-  shore_acres_graph = overpass_graph(shore_acres_north, shore_acres_east, shore_acres_south, shore_acres_west)
+  shore_acres_graph = OverpassGraph.graph(shore_acres_north, shore_acres_east, shore_acres_south, shore_acres_west)
 
   describe "one way street" do
     describe "the Parkway" do
@@ -84,7 +84,7 @@ describe "graph for Shore Acres, Mamaroneck, NY with metric distances" do
   shore_acres_east = -73.71407747268677
   shore_acres_south = 40.94329381595473
   shore_acres_west = -73.73105049133301
-  shore_acres_graph = overpass_graph(shore_acres_north, shore_acres_east, shore_acres_south, shore_acres_west, metric: true)
+  shore_acres_graph = OverpassGraph.graph(shore_acres_north, shore_acres_east, shore_acres_south, shore_acres_west, metric: true)
 
   describe "one way street" do
     describe "the Parkway" do
@@ -138,7 +138,7 @@ describe "graph for (part of) Midtown, Manhattan, NY" do
   midtown_east = -73.97675156593323
   midtown_south = 40.75897668730365
   midtown_west = -73.98523807525635
-  midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west)
+  midtown_graph = OverpassGraph.graph(midtown_north, midtown_east, midtown_south, midtown_west)
 
   describe "one way street" do
     describe "West 50th Street" do
@@ -189,7 +189,7 @@ describe "undirected graph for (part of) Midtown, Manhattan, NY" do
   midtown_east = -73.97675156593323
   midtown_south = 40.75897668730365
   midtown_west = -73.98523807525635
-  midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west, directed: false)
+  midtown_graph = OverpassGraph.graph(midtown_north, midtown_east, midtown_south, midtown_west, directed: false)
 
   describe "one way street" do
     describe "West 50th Street" do
@@ -214,7 +214,7 @@ describe "graph for (part of) Midtown, Manhattan, NY excluding 'secondary' highw
   midtown_east = -73.97675156593323
   midtown_south = 40.75897668730365
   midtown_west = -73.98523807525635
-  midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west, filter_by_allowing: false, filtered_values:['secondary'])
+  midtown_graph = OverpassGraph.graph(midtown_north, midtown_east, midtown_south, midtown_west, filter_by_allowing: false, filtered_values:['secondary'])
 
   describe "'secondary' highway" do
     describe "West 50th Street" do
@@ -239,7 +239,7 @@ describe "graph for (part of) Midtown, Manhattan, NY including only 'secondary' 
   midtown_east = -73.97675156593323
   midtown_south = 40.75897668730365
   midtown_west = -73.98523807525635
-  midtown_graph = overpass_graph(midtown_north, midtown_east, midtown_south, midtown_west, filtered_values:['secondary'])
+  midtown_graph = OverpassGraph.graph(midtown_north, midtown_east, midtown_south, midtown_west, filtered_values:['secondary'])
 
   describe "'secondary' highway" do
     describe "West 50th Street" do
@@ -264,7 +264,7 @@ describe "graph for Hanover, NH" do
   hanover_east = -72.28413820266724
   hanover_south = 43.69828604529516
   hanover_west = -72.29262471199036
-  hanover_graph = overpass_graph(hanover_north, hanover_east, hanover_south, hanover_west)
+  hanover_graph = OverpassGraph.graph(hanover_north, hanover_east, hanover_south, hanover_west)
   
   describe "one way street" do
     describe "allen street" do

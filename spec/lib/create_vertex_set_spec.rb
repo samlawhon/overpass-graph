@@ -6,9 +6,9 @@ shore_acres_roads = shore_acres_roads()
 midtown_roads = midtown_roads()
 hanover_roads = hanover_roads()
 
-shore_acres_vertices = create_vertex_set(shore_acres_roads)
-midtown_vertices = create_vertex_set(midtown_roads)
-hanover_vertices = create_vertex_set(hanover_roads)
+shore_acres_vertices = OverpassGraph.create_vertex_set(shore_acres_roads)
+midtown_vertices = OverpassGraph.create_vertex_set(midtown_roads)
+hanover_vertices = OverpassGraph.create_vertex_set(hanover_roads)
 
 describe "Shore Acres, Mamaroneck, NY analysis" do
   
