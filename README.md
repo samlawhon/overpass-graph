@@ -49,7 +49,7 @@ The algorithm to build the graph works as follows:
 * First, it builds the set of vertices in the graph. This is done by processing all coordinates in the set of queried roads. If a coordinate begins or ends a road, or if it is present in more than one road, it will be added to the vertex set.
 * Second, it builds the adjacency map, by processing all coordinates again and constructing edges from one vertex to the next vertex based on the sum of the distances between the intervening nodes.
 
-NOTE: the time and space complexity for building the graph are both *O(n)* where *n* is the number of nodes returned by the API call. In practice, for reasonably sized bounding boxes, the API call will take much longer than building the graph.
+NOTE: the time and space complexity for building the graph are both *O(n)* where *n* is the number of nodes returned by the API call. The API call should take much longer than building the graph.
 
 ## Example
 
