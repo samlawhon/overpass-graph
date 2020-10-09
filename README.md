@@ -52,6 +52,21 @@ The algorithm to build the graph works as follows:
 NOTE: the time and space complexity for building the graph are both *O(n)* where *n* is the number of nodes returned by the API call. The API call should take much longer than building the graph.
 
 ## Example
+Below is an example of using Overpass Graph to generate the shortest path between a gas station (start) and parking lot (finish) in the town of Mamaroneck, NY, under two different circumstances.
+1. In the first, a graph is built from all types of roads and paths (i.e. does not filter) in the area.
+2. In the second, a graph is built for the same area, but highways are excluded from the graph (more specifically, OSM highways of type 'primary' are excluded).
+
+Here is a short script to build the graphs using Overpass Graph and generate the shortest paths from start to finish using Dijkastra's algorithm.
+
+![script to build graphs](example/script.png)
+
+Below is a visualization of all_roads_path:
+
+![path from start to finish that takes a state highway](example/all_roads_path.png)
+
+And below is a visualization of the path returned when highways are disallowed:
+
+![path from start to finish that takes no highways](example/no_highways_path.png)
 
 ## License
 Released under the MIT license. See the [LICENSE](https://github.com/samlawhon/overpass-graph/blob/master/LICENSE.txt) file for further details.
