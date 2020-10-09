@@ -64,7 +64,7 @@ Below is a visualization of all_roads_path:
 
 ![path from start to finish that takes a state highway](example/all_roads_path.png)
 
-And below is a visualization of the no_highways_path:
+And below is a visualization of no_highways_path:
 
 ![path from start to finish that takes no highways](example/no_highways_path.png)
 
