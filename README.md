@@ -2,7 +2,7 @@
 
 ## Installation
 ```
-coming soon
+gem install overpass_graph
 ```
 ## Usage
 ### Basic Usage

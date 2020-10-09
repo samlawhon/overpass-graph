@@ -11,5 +11,5 @@ Gem::Specification.new do |s|
   s.license       = 'MIT'
   s.add_dependency 'overpass-api-ruby', [">= 0.3.1", "< 1.0.0"]
   s.add_dependency 'haversine', [">= 0.3.2", "< 1.0.0"]
-  s.add_development_dependency 'rspec', [">= 3.9.0"]
+  s.add_development_dependency 'rspec', ["~> 3.9"]
 end
