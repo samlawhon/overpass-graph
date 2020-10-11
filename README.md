@@ -6,8 +6,8 @@ gem install overpass_graph
 ```
 ## Usage
 ### Basic Usage
-To create a graph, use the function `overpass_graph` after requiring the library.
-This function takes four required arguments, representing the edges of a bounding box. By default, it will return a weighted, directed graph of all roads and paths within the bounding box.
+To create a graph, use the method `OverpassGraph.graph` after requiring the library.
+This method takes four required arguments, representing the edges of a bounding box. By default, it will return a weighted, directed graph of all roads and paths within the bounding box.
 For example:
 ```
 graph = OverpassGraph.graph(north, east, south, west)
@@ -26,18 +26,18 @@ Note that vertices in the graph are any nodes in the set of queried nodes that e
 ### Optional Arguments
 #### Basic Optional Arguments
 `OverpassGraph.graph` takes a number of optional keyword arguments. 
-* To make a graph undirected, pass `directed: false` to the function (by default, graphs are directed).
-* To make a graph with metric distance values as opposed to imperial, pass `metric: true` to the function (by default, graphs use the imperial system)
+* To make a graph undirected, pass `directed: false` to the method (by default, graphs are directed).
+* To make a graph with metric distance values as opposed to imperial, pass `metric: true` to the method (by default, graphs use the imperial system)
 
 #### Filtering
-`OverpassGraph.graph` allows you to filter the types of roads contained in the graph. As the library creates graphs using OpenStreetMap (OSM) data, this filtering is done using the OSM data model. By default, the function queries for all *ways* with the key *highway* (OSM's key for identifying any type of road, street or path). You may restrict which *highway* values the function queries for (and hence builds a graph from). This is done in two different ways:
+`OverpassGraph.graph` allows you to filter the types of roads contained in the graph. As the library creates graphs using OpenStreetMap (OSM) data, this filtering is done using the OSM data model. By default, the method queries for all *ways* with the key *highway* (OSM's key for identifying any type of road, street or path). You may restrict which *highway* values the method queries for (and hence builds a graph from). This is done in two different ways:
 * To specify which *highway* values you would like to build a graph from, pass an array of allowed OSM *highway* values to the filtered values. The following would return a graph built from all the primary and secondary *highway*s in the specified bounding box: 
 ```
 OverpassGraph.graph(..., filtered_values: ['primary', 'secondary'])
 ```
 * To query for all *highway* values except for a specified few which are not allowed, you must pass two keyword arguments to `overpass_graph`. 
-    * First, to specify that you wish to prevent certain *highway* values and allow all others, pass the keyword argument `filter_by_allowing: false` to the function. 
-    * Second, pass in the not-allowed values to the `overpass_graph` function using the filtered values keyword argument. The following would return a graph with all ways of type *highway* except for 'secondary' *highway*s: 
+    * First, to specify that you wish to prevent certain *highway* values and allow all others, pass the keyword argument `filter_by_allowing: false` to the method. 
+    * Second, pass in the not-allowed values to the `overpass_graph` method using the filtered values keyword argument. The following would return a graph with all ways of type *highway* except for 'secondary' *highway*s: 
     ```
     OverpassGraph.graph(..., filter_by_allowing: false, filtered_values: ['secondary'])
     ```
