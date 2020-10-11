@@ -70,3 +70,4 @@ And below is a visualization of no_highways_path:
 
 ## License
 Released under the MIT license. See the [LICENSE](https://github.com/samlawhon/overpass-graph/blob/master/LICENSE.txt) file for further details.
+Overpass Graph processes and returns OpenStreetMap data. See their [license FAQ](https://wiki.osmfoundation.org/wiki/Licence/Licence_and_Legal_FAQ) for further information about incorporating this data in your product.
